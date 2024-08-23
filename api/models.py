@@ -9,12 +9,12 @@ User = settings.AUTH_USER_MODEL
 
 class Stock(models.Model):
     title = models.CharField(
-        verbose_name=_('Название'),
+        verbose_name=_('Name'),
         max_length=100,
         unique=True
     )
     address = models.CharField(
-        verbose_name=_('Адрес'),
+        verbose_name=_('Address'),
         max_length=150
     )
 
@@ -22,8 +22,8 @@ class Stock(models.Model):
         indexes = (
             models.Index(fields=('address',)),
         )
-        verbose_name = _('Склад')
-        verbose_name_plural = _('Склады')
+        verbose_name = _('Warehouse')
+        verbose_name_plural = _('Warehouses')
 
     def __str__(self) -> str:
         return f'[{self.title[:15]}] {self.address[:50]}'
@@ -31,14 +31,14 @@ class Stock(models.Model):
 
 class Category(models.Model):
     title = models.CharField(
-        verbose_name=_('Название'),
+        verbose_name=_('Name'),
         max_length=100,
         unique=True
     )
 
     class Meta:
-        verbose_name = _('Категория')
-        verbose_name_plural = _('Категории')
+        verbose_name = _('Category')
+        verbose_name_plural = _('Categories')
 
     def __str__(self) -> str:
         return f'{self.title}'
@@ -46,36 +46,36 @@ class Category(models.Model):
 
 class Equipment(mixins.CreatedUpdatedMixin, models.Model):
     title = models.CharField(
-        verbose_name=_('Название'),
+        verbose_name=_('Name'),
         max_length=100,
         unique=True
     )
     quantity = models.PositiveSmallIntegerField(
-        verbose_name=_('Количество'),
+        verbose_name=_('Ammount'),
         default=1
     )
     stock = models.ForeignKey(
-        verbose_name=_('Склад'),
+        verbose_name=_('Warehouse'),
         to=Stock,
         on_delete=models.CASCADE,
-        related_name='equipments'
+        related_name='equipment'
     )
     category = models.ForeignKey(
-        verbose_name=_('Категория'),
+        verbose_name=_('Catefory'),
         to=Category,
         on_delete=models.CASCADE,
-        related_name='equipments'
+        related_name='equipment'
     )
     user = models.ForeignKey(
-        verbose_name=_('Владелец'),
+        verbose_name=_('Owner'),
         to=User,
         on_delete=models.CASCADE,
-        related_name='equipments'
+        related_name='equipment'
     )
 
     class Meta:
-        verbose_name = _('Оборудование')
-        verbose_name_plural = _('Оборудования')
+        verbose_name = _('Equipment')
+        verbose_name_plural = _('Equipment')
 
     def __str__(self) -> str:
         return f'[{self.title[:15]}] {self.quantity}'

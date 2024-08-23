@@ -8,9 +8,9 @@ from rest_framework import permissions
 
 schema_view = get_schema_view(
     openapi.Info(
-        contact=openapi.Contact(email="example@mail.ru"),
+        contact=openapi.Contact(email="example@gmail.com"),
         default_version='v1',
-        description='Документация для системы складов',
+        description='Documentation for warehouse system',
         license=openapi.License(name="BSD License"),
         title='Stock API'
     ),
@@ -42,3 +42,4 @@ if settings.DEBUG:
             name='schema-swagger-ui'
         ),
     ] + static(document_root=settings.MEDIA_ROOT, prefix=settings.MEDIA_URL)
+

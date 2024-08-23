@@ -11,7 +11,7 @@ app_name = 'api'
 
 router = DefaultRouter()
 router.register(r'categories', viewset=views.CategoryViewSet)
-router.register(r'equipments', viewset=views.EquipmentViewSet)
+router.register(r'equipment', viewset=views.EquipmentViewSet)
 router.register(r'stocks', viewset=views.StockViewSet)
 
 urlpatterns = [
