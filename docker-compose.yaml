@@ -1,0 +1,31 @@
+version: '3.3'
+
+services:
+  db:
+    image: postgres:13.0-alpine
+    restart: always
+    volumes:
+      - ecom_db_volume:/var/lib/postgresql/data/
+    env_file:
+      - .env
+    expose:
+      - 5432
+
+  web:
+    build: .
+    restart: always
+    volumes:
+      - static_volume:/backend/static/
+      - media_volume:/backend/media/
+    depends_on:
+      - db
+    env_file:
+      - .env
+    ports:
+      - "8000:8000"
+    command: python3 warehouses/manage.py runserver 0.0.0.0:8000
+
+volumes:
+  ecom_db_volume:
+  static_volume:
+  media_volume:
