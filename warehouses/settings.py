@@ -10,12 +10,17 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = os.getenv('DJANGO_SECRET_KEY')
 
-DEBUG = os.getenv('DEBUG', 0)
+# DEBUG = os.getenv('DEBUG', 0)
+DEBUG = True
 
 ALLOWED_HOSTS = [
     'localhost',
     '127.0.0.1',
     '[::1]'
+]
+
+INTERNAL_IPS = [
+    "127.0.0.1",
 ]
 
 INSTALLED_APPS = [
@@ -30,6 +35,7 @@ INSTALLED_APPS = [
     'api.apps.ApiConfig',
     'users.apps.UsersConfig',
     'django_extensions',
+    'debug_toolbar'
 ]
 
 MIDDLEWARE = [
@@ -40,6 +46,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    "debug_toolbar.middleware.DebugToolbarMiddleware"
 ]
 
 ROOT_URLCONF = 'warehouses.urls'
@@ -64,7 +71,7 @@ WSGI_APPLICATION = 'warehouses.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': os.getenv('POSTGRES_DB'),
         'USER': os.getenv('POSTGRES_USER'),
         'PASSWORD': os.getenv('POSTGRES_PASSWORD'),

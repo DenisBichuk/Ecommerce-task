@@ -1,7 +1,7 @@
 from rest_framework.serializers import ModelSerializer
 
 from . import models
-from ..users.serializers import UserSerializer
+from users.serializers import UserSerializer
 
 
 class CategorySerializer(ModelSerializer):
